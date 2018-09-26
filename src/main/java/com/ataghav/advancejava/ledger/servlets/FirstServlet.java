@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/test")
+@WebServlet(urlPatterns = "/first")
 public class FirstServlet extends HttpServlet {
     private static final String PERSISTENCE_UNIT_NAME = "h2-jpa";
     private static EntityManagerFactory factory;
@@ -35,9 +35,5 @@ public class FirstServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("ERROR!!! " + e.getMessage());
         }
-
-
-//        Account acc = em.find()
-
     }
 }
