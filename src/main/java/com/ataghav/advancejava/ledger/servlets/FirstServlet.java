@@ -1,6 +1,7 @@
 package com.ataghav.advancejava.ledger.servlets;
 
 import com.ataghav.advancejava.ledger.entities.Account;
+import com.ataghav.advancejava.ledger.services.AccountManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,11 +18,36 @@ import java.io.PrintWriter;
 public class FirstServlet extends HttpServlet {
     private static final String PERSISTENCE_UNIT_NAME = "h2-jpa";
     private static EntityManagerFactory factory;
+    private static AccountManager am;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter printWriter = res.getWriter();
-        printWriter.print("This is me, I'm OK!2");
+        String formNumber = req.getParameter("number");
+        String formOwner = req.getParameter("owner");
+        String formBalance = req.getParameter("balance");
+
+        if (req.getParameter("create") != null) {
+            printWriter.print("Create");
+            if (formNumber != null && formOwner != null && formBalance != null) {
+                am.create(formNumber, formOwner, Double.parseDouble(formBalance));
+            }
+        } else if (req.getParameter("read") != null) {
+            printWriter.print("Read");
+            if (formNumber != null) {
+                am.read(formNumber);
+            }
+        } else if (req.getParameter("update") != null) {
+            printWriter.print("Update");
+            if (formNumber != null && formOwner != null && formBalance != null) {
+                am.update(formNumber, formOwner, Double.parseDouble(formBalance));
+            }
+        } else if (req.getParameter("delete") != null) {
+            printWriter.print("Delete");
+            if (formNumber != null) {
+                am.delete(formNumber);
+            }
+        }
 
         Account account01 = new Account("010001", "Ahmad Ali", 120.00);
 
