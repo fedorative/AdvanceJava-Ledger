@@ -2,7 +2,9 @@ package com.ataghav.advancejava.ledger.servlets;
 
 import com.ataghav.advancejava.ledger.entities.Account;
 import com.ataghav.advancejava.ledger.services.AccountManager;
+import com.ataghav.advancejava.ledger.services.IAccountManager;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,9 +18,8 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/first")
 public class FirstServlet extends HttpServlet {
-
-
-    private static AccountManager am;
+    @Inject
+    private IAccountManager am;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -48,7 +49,5 @@ public class FirstServlet extends HttpServlet {
                 am.delete(formNumber);
             }
         }
-
-
     }
 }
