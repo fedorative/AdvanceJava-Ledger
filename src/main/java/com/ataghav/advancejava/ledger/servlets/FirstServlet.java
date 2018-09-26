@@ -16,8 +16,8 @@ import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/first")
 public class FirstServlet extends HttpServlet {
-    private static final String PERSISTENCE_UNIT_NAME = "h2-jpa";
-    private static EntityManagerFactory factory;
+
+
     private static AccountManager am;
 
     @Override
@@ -49,17 +49,6 @@ public class FirstServlet extends HttpServlet {
             }
         }
 
-        Account account01 = new Account("010001", "Ahmad Ali", 120.00);
 
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager em = factory.createEntityManager();
-
-        try {
-            em.persist(account01);
-//            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            System.out.println("ERROR!!! " + e.getMessage());
-        }
     }
 }
